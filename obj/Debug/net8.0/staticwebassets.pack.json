@@ -1,0 +1,53 @@
+{
+  "Files": [
+    {
+      "Id": "/home/ubuntu/testapp/TestApi/wwwroot/assets/hero-CLDdwZDr.png",
+      "PackagePath": "staticwebassets/assets/hero-CLDdwZDr.png"
+    },
+    {
+      "Id": "/home/ubuntu/testapp/TestApi/wwwroot/assets/index-Bnpwovj6.js",
+      "PackagePath": "staticwebassets/assets/index-Bnpwovj6.js"
+    },
+    {
+      "Id": "/home/ubuntu/testapp/TestApi/wwwroot/assets/index-DykytF2W.css",
+      "PackagePath": "staticwebassets/assets/index-DykytF2W.css"
+    },
+    {
+      "Id": "/home/ubuntu/testapp/TestApi/wwwroot/assets/react-CHdo91hT.svg",
+      "PackagePath": "staticwebassets/assets/react-CHdo91hT.svg"
+    },
+    {
+      "Id": "/home/ubuntu/testapp/TestApi/wwwroot/assets/vite-BF8QNONU.svg",
+      "PackagePath": "staticwebassets/assets/vite-BF8QNONU.svg"
+    },
+    {
+      "Id": "/home/ubuntu/testapp/TestApi/wwwroot/favicon.svg",
+      "PackagePath": "staticwebassets/favicon.svg"
+    },
+    {
+      "Id": "/home/ubuntu/testapp/TestApi/wwwroot/icons.svg",
+      "PackagePath": "staticwebassets/icons.svg"
+    },
+    {
+      "Id": "/home/ubuntu/testapp/TestApi/wwwroot/index.html",
+      "PackagePath": "staticwebassets/index.html"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.TestApi.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.TestApi.props",
+      "PackagePath": "build\\TestApi.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.TestApi.props",
+      "PackagePath": "buildMultiTargeting\\TestApi.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.TestApi.props",
+      "PackagePath": "buildTransitive\\TestApi.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
