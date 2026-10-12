@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+       agent { label 'app-server' }
 
     stages {
         stage('Checkout') {
