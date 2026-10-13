@@ -1,5 +1,5 @@
 pipeline {
-       agent { label 'app-server' }
+    agent { label 'app-server' }
 
     stages {
         stage('Checkout') {
@@ -19,7 +19,18 @@ pipeline {
         stage('Check Database Connection') {
             steps {
                 echo 'Verifying database connectivity...'
-                sh 'curl -f http://localhost:5000/api/dbcheck || echo "DB check needs app running"'
+                sh '''
+                    for i in 1 2 3 4 5; do
+                        if curl -fsS --max-time 5 http://localhost:5000/api/dbcheck; then
+                            echo "DB check passed"
+                            exit 0
+                        fi
+                        echo "Attempt $i failed, retrying in 5 seconds..."
+                        sleep 5
+                    done
+                    echo "DB check FAILED: app or database not reachable"
+                    exit 1
+                '''
             }
         }
 
