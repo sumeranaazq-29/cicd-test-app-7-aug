@@ -9,7 +9,7 @@ A working CI/CD pipeline that builds, tests, backs up and deploys a .NET 8 + Rea
 
 - Automated builds triggered by a GitHub webhook
 - A Jenkins agent connected over SSH, so the build runs on the application server
-- A multi-stage Jenkinsfile with a database health check, approval gate, backup and deploy
+- A multi-stage Jenkinsfile with an approval gate, automatic backup, deploy and a retrying database health check after deployment
 - The API running as a `systemd` service with automatic restart
 - Real troubleshooting notes from problems hit along the way
 
@@ -43,12 +43,11 @@ Both servers are Ubuntu `t3.micro` instances in the `ap-south-1` region.
 | Stage | What it does |
 | --- | --- |
 | Checkout | Pulls the latest code from GitHub |
-| Build | Runs `dotnet build` and `dotnet publish` on the App Server agent |
-| DB check | Calls the API health endpoint, retrying up to 5 times, and fails the build if the database is unreachable |
-| Approval | Pauses for a person to approve the deployment |
-| Backup | Copies the current live version to a dated folder before changing anything |
-| Deploy | Copies the new build into place and restarts the `testapi` service |
-| Verify | Runs the database check again to confirm the new version is healthy |
+| Build | Runs `dotnet publish -c Release` on the App Server agent into a staging folder |
+| Approval | Pauses for a person to approve the deployment, with a 30-minute timeout |
+| Deploy | Takes a dated `.tgz` backup of the live folder, stops the `testapi` service, replaces the files and starts the service again |
+| Verify Deployment | Calls `/api/dbcheck` up to 5 times, 5 seconds apart, and fails the build if the app or database is unreachable |
+| Post Actions | Prints success, or on failure points to the latest backup in the backups folder |
 
 ## Tech stack
 
@@ -87,7 +86,7 @@ Both servers are Ubuntu `t3.micro` instances in the `ap-south-1` region.
 
 ## Roadmap
 
-- Automatic rollback to the last backup if verification fails
+- Automatic rollback to the last backup if verification fails (today the failed build message points to the backup, and the restore is manual)
 - Security hardening: restricted sudo, builds off the controller, HTTPS
 - Static analysis (SonarQube) and dynamic scanning (OWASP ZAP) stages
 - Notifications for every stage
